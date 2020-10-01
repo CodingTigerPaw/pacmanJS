@@ -1,4 +1,4 @@
-import {GRID_SIZE, CELL_SIZE, OBJECT_TYPE, CLASS_LIST} from  './setup'
+import {GRID_SIZE, CELL_SIZE, OBJECT_TYPE, CLASS_LIST} from  './setup.js'
 class GameBoard{
     constructor(DOMGrid){
         this.dotCount = 0
@@ -17,7 +17,7 @@ class GameBoard{
         this.dotCount = 0;
         this.grid = [];
         this.DOMGrid.innerHTML = ''
-        this.DOMGrid.style.cssText = `{grid-template-columns: repeat(${GRID_SIZE}, ${CELL_SIZE}px)}`
+        this.DOMGrid.style.cssText = `grid-template-columns: repeat(${GRID_SIZE}, ${CELL_SIZE}px)`
 
         level.forEach(square =>{
             const div = document.createElement('div');
@@ -43,5 +43,11 @@ class GameBoard{
     rotateDiv(pos, deg ){
         this.grid[pos].style.transform = `${deg}deg`
     }
-    
+    static createGameBoard(DOMGrid, level){
+        const board = new this(DOMGrid)
+        board.createGrid(level)
+        return board
+    }
 }
+
+export default GameBoard
